@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:th="http://www.thymeleaf.org" 
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+   
+<head th:replace="layout :: head"></head>
+
+<body>
+    <nav th:replace="layout :: header"></nav>
+
+    <div class="container" id="main-content">
+        <div class="row d-flex justify-content-center">
+           <form style="min-width: 300px;" action="#" th:action="@{/hocvien/luu}" th:object="${hocvien}" method="POST" novalidate="novalidate">
+    <h5 class="text-center">Mẫu tạo học viên</h5>
+
+  
+
+    <div class="form-group">
+        <input class="form-control" type="text" placeholder="Nhập họ tên"
+               th:field="*{hoten}" th:errorclass="field-error" />
+        <em th:if="${#fields.hasErrors('hoten')}" th:errors="*{hoten}"></em>
+    </div>
+
+    <div class="form-group">
+        <input class="form-control" type="text" placeholder="Nhập mã thẻ học viên"
+               th:field="*{mathehocvien}" th:errorclass="field-error" />
+        <em th:if="${#fields.hasErrors('mathehocvien')}" th:errors="*{mathehocvien}"></em>
+    </div>
+    <div class="form-group">
+        <input class="form-control" type="text" placeholder="Nhập trình độ"
+               th:field="*{trinhdo}" th:errorclass="field-error" />
+        <em th:if="${#fields.hasErrors('trinhdo')}" th:errors="*{trinhdo}"></em>
+    </div>
+    <div class="form-group">
+        <input class="form-control" type="date" placeholder="Nhập ngaysinh"
+               th:field="*{ngaysinh}" th:errorclass="field-error" />
+        <em th:if="${#fields.hasErrors('ngaysinh')}" th:errors="*{ngaysinh}"></em>
+    </div>
+    <div class="form-group">
+        <input class="form-control" type="text" placeholder="Nhập địa chỉ"
+               th:field="*{diachi}" th:errorclass="field-error" />
+        <em th:if="${#fields.hasErrors('diachi')}" th:errors="*{diachi}"></em>
+    </div>
+
+    <div class="form-group">
+        <input class="form-control" type="text" placeholder="Nhập số điện thoại"
+               th:field="*{dienthoai}"  />
+    </div>
+     <div class="form-group">
+        <input class="form-control" type="email" placeholder="Nhập email"
+               th:field="*{email}" />
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-block btn-primary">
+            <i class="fa fa-save"></i> Lưu
+        </button>
+    </div>
+</form>
+        </div>
+    </div><!-- /.container -->
+
+    <footer th:replace="layout :: footer"></footer>
+</body>
+</html>

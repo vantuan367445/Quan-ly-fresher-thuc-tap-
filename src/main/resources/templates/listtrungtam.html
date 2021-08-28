@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:th="http://www.thymeleaf.org" 
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:replace="layout :: head"></head>
+
+<body>
+    <nav th:replace="layout :: header"></nav>
+
+    <div class="container" id="main-content">
+        <div class="row">
+           
+
+            <div class="col-6 no-padding">
+                <a href="#" th:href="@{/trungtam/them}" class="btn btn-success float-right">
+    	<i class="fa fa-plus-square"></i> Tạo  trung tâm
+		</a>
+            </div>
+        </div>
+
+        
+
+           <th:block th:if="${#lists.isEmpty(trungtam)}">
+                <h5>Không có trungtam</h5>
+            </th:block>
+             <th:block th:unless="${#lists.isEmpty(trungtam)}">
+                <div class="table-responsive">
+                    <h5>Danh sách trung tâm</h5>
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>Số thứ tự</th>
+                            <th>Tên trung tâm</th>
+                            <th>Địa chỉ trung tâm</th>
+                            <th>Số điện thoại</th>
+                            <th>Email</th>
+                            <th>Cập nhât</th>
+                            
+                            
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="trungtam,iterStat : ${trungtam}">
+                           	 <th scope="row" th:text="${iterStat.count}"></th>
+                            <td th:text="${trungtam.tentrungtam}"></td>
+                            <td th:text="${trungtam.diachitrungtam}"></td>
+                            <td th:text="${trungtam.sodienthoai}"></td>
+                            <td th:text="${trungtam.email}"></td>
+                           
+                        
+                            
+                            
+                            <td>
+                               <a href="#" th:href="@{/trungtam/{id}/sua(id=${trungtam.id})}" class="mr-sm-2 text-primary">
+    						<i class="fa fa-pencil"></i>
+							</a>
+                              <a href="#" th:href="@{/trungtam/{id}/xoa(id=${trungtam.id})}" class="text-danger">
+    							<i class="fa fa-trash"></i>
+								</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </th:block>
+        </div>
+        
+ 
+    <div class="row mt-4">
+    <div th:if="${successMessage}" class="alert alert-success alert-dismissible fade show" role="alert">
+        <span th:text="${successMessage}"></span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    ...
+</div>
+
+    <footer th:replace="layout :: footer"></footer>
+
+</body>
+</html>

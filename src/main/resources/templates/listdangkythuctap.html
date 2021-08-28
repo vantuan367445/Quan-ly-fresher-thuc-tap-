@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:th="http://www.thymeleaf.org" 
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:replace="layout :: head"></head>
+
+<body>
+    <nav th:replace="layout :: header"></nav>
+
+    <div class="container" id="main-content">
+        <div class="row">
+            <div class="col-6 no-padding">
+                <form class="form-inline" action="#" th:action="@{/hocvien/timkiem}" method="get">
+   				 <input class="form-control mr-sm-2" type="search" name="keyword" placeholder="Tìm kiếm theo tên ..." />
+    			<button class="btn btn-primary" type="submit">
+       			 <i class="fa fa-search"></i> Tìm kiếm
+    </button>
+</form>
+ <form class="form-inline" action="#" th:action="@{/hocvien/timkiememail}" method="get">
+   				 <input class="form-control mr-sm-2" type="search" name="keyword" placeholder="Tìm kiếm theo email ..." />
+    			<button class="btn btn-primary" type="submit">
+       			 <i class="fa fa-search"></i> Tìm kiếm Theo Email
+    </button>
+</form>
+ <form class="form-inline" action="#" th:action="@{/hocvien/timkiemngonngulaptrinh}" method="get">
+   				 <input class="form-control mr-sm-2" type="search" name="keyword" placeholder="Tìm kiếm theo ngôn ngữ lập trình ..." />
+    			<button class="btn btn-primary" type="submit">
+       			 <i class="fa fa-search"></i> Tìm kiếm Theo Ngôn Ngữ Lập Trình
+    </button>
+</form>
+ 
+            </div>
+
+            <div class="col-6 no-padding">
+                <a href="#" th:href="@{/hocvien/them}" class="btn btn-success float-right">
+    	<i class="fa fa-plus-square"></i> Tạo học viên mới
+		</a>
+            </div>
+        </div>
+
+        
+
+           <div class="row mt-4">
+            <th:block th:if="${#lists.isEmpty(hocvien)}">
+                <h5>Không có học viên</h5>
+            </th:block>
+             <th:block th:unless="${#lists.isEmpty(hocvien)}">
+                <div class="table-responsive">
+                    <h5>Danh sách học viên</h5>
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>Số thứ tự</th>
+                            <th>Họ tên</th>
+                            <th>Mã thẻ học viên</th>
+                            <th>Trình độ</th>
+                            <th>Ngày sinh</th>
+                            <th>Địa chỉ</th>
+                            <th>Số điện thoại</th>
+                            <th>Email</th>
+                            <th>Cập nhật</th>
+                         
+                            
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="hocvien,iterStat : ${hocvien}">
+                           	 <th scope="row" th:text="${iterStat.count}"></th>
+                            <td th:text="${hocvien.hoten}"></td>
+                            <td th:text="${hocvien.mathehocvien}"></td>
+                            <td th:text="${hocvien.trinhdo}"></td>
+                            <td th:text="${hocvien.ngaysinh}"></td>
+                            <td th:text="${hocvien.diachi}"></td>
+                            <td th:text="${hocvien.dienthoai}"></td>
+                            <td th:text="${hocvien.email}"></td>
+                           
+                            
+                            
+                            <td>
+                               <a href="#" th:href="@{/hocvien/{id}/sua(id=${hocvien.id})}" class="mr-sm-2 text-primary">
+    						<i class="fa fa-pencil"></i>
+							</a>
+                              <a href="#" th:href="@{/hocvien/{id}/xoa(id=${hocvien.id})}" class="text-danger">
+    							<i class="fa fa-trash"></i>
+								</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </th:block>
+        </div>
+        </div>
+        
+ 
+    <div class="row mt-4">
+    <div th:if="${successMessage}" class="alert alert-success alert-dismissible fade show" role="alert">
+        <span th:text="${successMessage}"></span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    ...
+</div>
+
+    <footer th:replace="layout :: footer"></footer>
+
+</body>
+</html>
